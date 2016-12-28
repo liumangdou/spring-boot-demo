@@ -1,0 +1,19 @@
+#项目运行端口
+server:
+  port: 8080 
+
+spring:
+  profiles:
+    active: ${profileActive}
+    include: dev,test,prod
+    
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+logging:
+  config: classpath:config/logback-spring.xml
+  path: var/logs
+

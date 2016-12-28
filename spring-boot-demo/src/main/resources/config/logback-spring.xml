@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<appender name="LOGFILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- <File>${LOG_PATH}/${LOG_FILE}</File> -->
+		<encoder>
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+		<!--当prudent为true时，如果append设置为false，会被强行转成true -->
+		<append>true</append>
+		<!--prudent：小心的，慎重的。如果设置为true，不同JVM的file appenders能够安全地将日志输出到同一个文件中。 -->
+		<prudent>false</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--归档的日志文件的路径 -->
+			<fileNamePattern>${LOG_PATH}/log-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>7</maxHistory>
+			<!-- <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
+				<maxFileSize>512MB</maxFileSize> </TimeBasedFileNamingAndTriggeringPolicy> -->
+		</rollingPolicy>
+	</appender>
+	
+	<logger name="org.springframework.web" level="INFO" />
+	<logger name="org.springboot.sample" level="TRACE" />
+
+	<!-- 指定某个包下面的日志级别，如果root设置的日志级别为info 而某个包设置的为debug，这样某个包也可以打印debug的日志了 -->
+	<logger name="com.dou" level="debug" />
+
+	<root level="debug">
+		<appender-ref ref="LOGFILE" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</configuration>
+
+
+
+
+
+
+
+
+

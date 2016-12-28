@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dou.dao.CityMapper">
+	<cache />
+	<select id="getById" resultType="com.dou.entity.City">
+		select id,name,state,COUNTRY from City where id = #{id}
+	</select>
+	
+	 <!-- 若不需要自动返回主键，将useGeneratedKeys="true" keyProperty="id"去掉即可(当然如果不需要自动返回主键，直接用注解即可) -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT into City (name,state,country)VALUE (#{name},#{state},#{country})
+	</insert>
+</mapper>
