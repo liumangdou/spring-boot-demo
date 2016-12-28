@@ -10,6 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.dou.entity.City;
 import com.dou.service.ICityService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,6 +28,19 @@ public class TestCityService {
 		try {
 			log.debug("---------------------------------"+cityService.getById(1).getName());
 			int i = 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testInsert() throws Exception{
+		try {
+			City c = new City();
+			c.setName("李四");
+			c.setState("中国");
+			c.setCountry("中国");
+			cityService.insert(c);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

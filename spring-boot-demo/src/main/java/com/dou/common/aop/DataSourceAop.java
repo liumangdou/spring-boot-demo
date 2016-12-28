@@ -17,12 +17,12 @@ import com.dou.common.datasource.DataSourceContextHolder;
  * 从而导致获取 DataSourceContextHolder.getJdbcType(); 一直都是空值
  */
 @Aspect
-@Order(-1)
+@Order(-1) // 保证该AOP在@Transactional之前执行
 @Component
 public class DataSourceAop {
 	private static final Logger log = LoggerFactory.getLogger(DataSourceAop.class) ;
 	
-	@Before("execution(* com.dou.dao..*.find*(..)) or execution(* com.dou.dao..*.get*(..)) or execution(* com.dou.dao..*.select*(..))")
+	@Before("execution(* com.dou.service.impl..*.insert*(..)) or execution(* com.dou.service.impl..*.find*(..)) or execution(* com.dou.service.impl..*.get*(..)) or execution(* com.dou.service.impl..*.select*(..))")
 	public void setReadDataSourceType() {
 		DataSourceContextHolder.read();
 		log.info("dataSource切换到：Read");
